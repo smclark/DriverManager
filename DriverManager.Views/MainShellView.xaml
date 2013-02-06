@@ -1,0 +1,20 @@
+﻿<Window x:Class="DriverManager.Views.MainShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="800" WindowStyle="None" AllowsTransparency="True" Background="Gray" Foreground="White" BorderBrush="#5b5856" BorderThickness="2" WindowStartupLocation="CenterScreen">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Button x:Name="List" Content="List Drivers" />
+            <Button x:Name="Create" Content="Create Driver"/>            
+        </StackPanel>
+        <ContentControl x:Name="ActiveItem" Grid.Row="1" Margin="5" />
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" Background="Lightgray" Height="30" Margin="5,0,5,5" >
+            <Label x:Name="OutputText"  Foreground="{Binding OutputTextColour}" HorizontalAlignment="Right" />
+        </StackPanel>
+    </Grid>
+</Window>

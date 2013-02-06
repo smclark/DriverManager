@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Models="clr-namespace:DriverManager.Models;assembly=DriverManager.Models">
+    <DropShadowEffect x:Key="dropShadowSouthEast" Color="Black" Direction="315" 
+                                        ShadowDepth="5" Opacity=".5" />
+    <DropShadowEffect x:Key="dropShadowNorth" Color="Black" Direction="90" 
+                                        ShadowDepth="1" Opacity=".3" />
+
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <!-- For content Z-Order workaround dropshadow rendering issue. -->
+                        <!-- Dropshadow borders have no content to avoid content rendering clipping/distortion issues on some graphics cards/chips. -->
+                        <!-- Main border has transparent background to reveal drop shadow borders. -->
+                        <Border x:Name="brdr" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid VerticalAlignment="Center" >
+                                <TextBlock 
+                        HorizontalAlignment="Center" 
+                        TextAlignment="Center" 
+                        Grid.Row="1" 
+                        FontSize="{TemplateBinding FontSize}" 
+                        Text="{TemplateBinding Content}" 
+                        Name="content" 
+                        TextWrapping="Wrap" SnapsToDevicePixels="True"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#58595B"/>
+                            <Setter Property="BorderBrush" Value="#6D6E71" />
+                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter Property="Background" Value="White" />
+                            <!--SB : The BorderBrush property causes a strange issue with small sections of the button images disappearing on click on the 
+                                        AppSheet manufacturer select screen.  Cannot figure out how to resolve this ?? -->
+                            <Setter Property="BorderBrush" Value="White" />
+                            <Setter Property="BorderThickness" Value="2" />
+                            <Setter Property="Foreground" Value="#808285" />
+                            <!--<Setter Property="Effect" Value="{x:Null}"/>-->
+
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="LightGray" />
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                            <Setter Property="Foreground" Value="#EBEBEB" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>   
+    
+    
+
+</ResourceDictionary>
