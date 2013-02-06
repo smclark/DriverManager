@@ -9,9 +9,15 @@ using DriverManager.Models.Interfaces;
 
 namespace DriverManager.DataProviders
 {
+    /// <summary>
+    /// Data Provider to provide a simple set of Drivers. 
+    /// Acting as a Database to allow the user to add/remove/update Drivers.
+    /// </summary>
     public class DriverDataProvider : IDriverDataProvider
     {
-        private IList<IDriver> _drivers;
+        private readonly IList<IDriver> _drivers;
+
+
 
         public DriverDataProvider()
         {
@@ -25,35 +31,106 @@ namespace DriverManager.DataProviders
                            };
         }
 
+        /// <summary>
+        /// Retrieve all the Drivers.
+        /// </summary>
+        /// <returns>IList of IDriver objects.</returns>
         public IList<IDriver> GetAll()
         {
             return _drivers;
         }
 
+        /// <summary>
+        /// Gets a Driver by the ID.
+        /// </summary>
+        /// <param name="id">The ID associated with the Driver.</param>
+        /// <returns>IDriver Object</returns>
         public IDriver GetById(int id)
         {
             return (from driver in GetAll() where driver.ID == id select driver).First();
         }
 
+        /// <summary>
+        /// Gets a Driver by their FullName property.
+        /// </summary>
+        /// <param name="driverName">The FullName associated with the Driver.</param>
+        /// <returns>IDriver Object</returns>
         public IDriver GetByName(string driverName)
         {
             return (from driver in GetAll() where driver.FullName == driverName select driver).First();
         }
 
-        public int Delete(int driverId)
+
+        /// <summary>
+        /// Deletes the specified driver.
+        /// </summary>
+        /// <param name="driver">The driver</param>
+        /// <exception cref="ArgumentNullException">NULL Driver passed into method</exception>
+        /// <returns></returns>
+        public int Delete(IDriver driver)
         {
-            throw new NotImplementedException();
+            if (driver == null)
+                throw new ArgumentNullException("driver");
+
+            int returnValue = 0;
+
+            if (_drivers.Contains(driver))
+                _drivers.Remove(driver);
+            else
+                returnValue = -1;
+
+            return returnValue;
         }
 
+        /// <summary>
+        /// Updates the an existing Driver.
+        /// </summary>
+        /// <param name="driver">The updated Driver.</param>
+        /// <returns></returns>
         public int Update(IDriver driver)
         {
-            throw new NotImplementedException();
+            if (driver == null)
+                throw new ArgumentNullException("driver");
+
+            int returnValue = 0;
+
+            IDriver existingDriver = GetById(driver.ID);
+
+            if(existingDriver != null)
+            {
+                int driverIndex = _drivers.IndexOf(existingDriver);
+
+                if (driverIndex >= 0)
+                    _drivers[driverIndex] = driver;
+                else
+                    returnValue = -2;
+            }
+            else
+            {
+                return -1;
+            }
+
+            return returnValue;
         }
 
+        /// <summary>
+        /// Saves a New Driver to the "DB".
+        /// </summary>
+        /// <param name="driver">The new Driver.</param>
+        /// <returns></returns>
         public int Save(IDriver driver)
         {
-            _drivers.Add(driver);
-            return 0;
+            if (driver == null)
+                throw new ArgumentNullException("driver");
+
+            int returnValue = 0;
+
+            if (!_drivers.Contains(driver))
+                _drivers.Add(driver);
+            else
+                returnValue = -3;
+
+            return returnValue;
         }
     }
 }

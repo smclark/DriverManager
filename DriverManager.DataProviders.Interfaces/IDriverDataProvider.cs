@@ -11,7 +11,7 @@ namespace DriverManager.DataProviders.Interfaces
         IDriver GetById(int id);
         IDriver GetByName(string driverName);
         int Save(IDriver driver);
-        int Delete(int driverId);
+        int Delete(IDriver driver);
         int Update(IDriver driver);
     }
 }
