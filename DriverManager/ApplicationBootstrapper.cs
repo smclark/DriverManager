@@ -83,10 +83,10 @@ namespace DriverManager
             result.RegisterType<IDriverModel, DriverModel>(new InjectionConstructor(typeof(IDriverDataProvider)));
 
             result.RegisterType<IDriverListViewModel, DriverListViewModel>
-                (new InjectionConstructor(typeof(Func<IDriver>), typeof(IDriverModel)));
+                (new InjectionConstructor(typeof(IDriverModel)));
 
             result.RegisterType<IAddDriverViewModel, AddDriverViewModel>
-                (new InjectionConstructor(typeof(IDriverModel), typeof(IEventAggregator)));
+                (new InjectionConstructor(typeof(Func<IDriver>),typeof(IDriverModel), typeof(IEventAggregator)));
 
             return BuildContainer(result);
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using Caliburn.Micro;
-using DriverManager.Models;
 using DriverManager.Models.Interfaces;
 using DriverManager.Models.Messages;
 using DriverManager.ViewModels.Interfaces;
@@ -14,14 +13,19 @@ namespace DriverManager.ViewModels
         public string AddressInfo { get; set; }
         public string VehicleInfo { get; set; }
 
-        private IDriverModel _model;
-        private IEventAggregator _eventAggregator;
+        private readonly IDriverModel _model;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly Func<IDriver> _createDriver;
 
-        public AddDriverViewModel(IDriverModel model, IEventAggregator eventAggregator)
+        public AddDriverViewModel(Func<IDriver> createDriver, IDriverModel model, IEventAggregator eventAggregator)
         {
             if (model == null)
                 throw new ArgumentNullException("model");
+            if (createDriver == null)
+                throw new ArgumentNullException("createDriver");
+
             _model = model;
+            _createDriver = createDriver;
 
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
@@ -29,15 +33,15 @@ namespace DriverManager.ViewModels
 
         public void Save()
         {
-            var driver = new Driver();
+            var driver = _createDriver();
             driver.FirstName = FirstName;
             driver.LastName = LastName;
-            //driver.AddressInfo = new Address();
-            //driver.VehicleInfo = new Vehicle();
+            //driver.AddressInfo.City = "LOL";
+            //driver.VehicleInfo.RegistrationNumber = "SDFSD";
 
             int result = _model.CreateDriver(driver);
 
-            if(result != -1)//No error occurred
+            if (result != -1)//No error occurred
             {
                 _eventAggregator.Publish(new DriverCreatedMessage(driver.FullName));
             }

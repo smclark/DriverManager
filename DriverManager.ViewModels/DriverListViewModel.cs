@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using Caliburn.Micro;
 using DriverManager.Models.Interfaces;
 using DriverManager.ViewModels.Interfaces;
@@ -24,10 +20,8 @@ namespace DriverManager.ViewModels
         }
         
         private IDriverModel _model;
-        private Func<IDriver> _createDriver;
-        public DriverListViewModel(Func<IDriver> createDriver, IDriverModel model)
+        public DriverListViewModel(IDriverModel model)
         {
-            _createDriver = createDriver;
             _model = model;
         }
 
@@ -44,9 +38,7 @@ namespace DriverManager.ViewModels
 
         public void DriverSelected(IDriver sender)
         {
-            IDriver driver = _createDriver();
-            driver.FirstName = sender.FirstName;
-
+            //Populate DriveInfoView with sender data
         }
     }
 }
