@@ -20,11 +20,20 @@ namespace DriverManager
     {
         private IUnityContainer _unity;
 
+        /// <summary>
+        /// Override to configure the framework and setup your IoC container.
+        /// </summary>
         protected override void Configure()
         {
             _unity = BuildContainer();
         }
 
+        /// <summary>
+        /// Gets the instance of the type that is passed into the Method.
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         /// <exception cref="Exception"><c>Exception</c>.</exception>
         protected override object GetInstance(Type serviceType, string key)
         {
@@ -36,6 +45,11 @@ namespace DriverManager
             return result;
         }
 
+        /// <summary>
+        /// Gets all instances of a particular type
+        /// </summary>
+        /// <param name="serviceType">Type of the service.</param>
+        /// <returns></returns>
         protected override IEnumerable<object> GetAllInstances(Type serviceType)
         {
             return _unity.ResolveAll(serviceType);
@@ -53,6 +67,13 @@ namespace DriverManager
             result.RegisterInstance<IWindowManager>(new WindowManager());
             result.RegisterInstance<IEventAggregator>(new EventAggregator());
 
+            result.RegisterType<IDriver, Driver>();
+            result.RegisterType<IAddress, Address>();
+            result.RegisterType<IVehicle, Vehicle>();
+
+            result.RegisterType<Func<IDriver>>(
+                new InjectionFactory((i => new Func<IDriver>(() => result.Resolve<IDriver>()))));
+
             result.RegisterType<IMainShellViewModel, MainShellViewModel>
                 (new InjectionConstructor(typeof(IDriverListViewModel), typeof(IAddDriverViewModel), typeof(IEventAggregator)));
 
@@ -62,7 +83,7 @@ namespace DriverManager
             result.RegisterType<IDriverModel, DriverModel>(new InjectionConstructor(typeof(IDriverDataProvider)));
 
             result.RegisterType<IDriverListViewModel, DriverListViewModel>
-                (new InjectionConstructor(typeof(IDriverModel)));
+                (new InjectionConstructor(typeof(Func<IDriver>), typeof(IDriverModel)));
 
             result.RegisterType<IAddDriverViewModel, AddDriverViewModel>
                 (new InjectionConstructor(typeof(IDriverModel), typeof(IEventAggregator)));

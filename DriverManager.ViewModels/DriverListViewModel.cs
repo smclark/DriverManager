@@ -24,8 +24,10 @@ namespace DriverManager.ViewModels
         }
         
         private IDriverModel _model;
-        public DriverListViewModel(IDriverModel model)
+        private Func<IDriver> _createDriver;
+        public DriverListViewModel(Func<IDriver> createDriver, IDriverModel model)
         {
+            _createDriver = createDriver;
             _model = model;
         }
 
@@ -42,6 +44,8 @@ namespace DriverManager.ViewModels
 
         public void DriverSelected(IDriver sender)
         {
+            IDriver driver = _createDriver();
+            driver.FirstName = sender.FirstName;
 
         }
     }

@@ -56,7 +56,6 @@
     <Compile Include="DriverListModel.cs" />
     <Compile Include="Messages\ErrorMessage.cs" />
     <Compile Include="Messages\DriverCreatedMessage.cs" />
-    <Compile Include="PluginBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vehicle.cs" />
   </ItemGroup>
