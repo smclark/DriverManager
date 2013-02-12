@@ -12,6 +12,8 @@
     <AssemblyName>DriverManager.Models</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -64,12 +69,26 @@
       <Project>{B8453331-E885-44AD-B813-AB7244F22B6F}</Project>
       <Name>DriverManager.DataProviders.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DriverManager.Enums\DriverManager.Enums.csproj">
+      <Project>{A03EFD92-8F64-434B-9163-CC0578345A07}</Project>
+      <Name>DriverManager.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DriverManager.Models.Interfaces\DriverManager.Models.Interfaces.csproj">
       <Project>{7B183CC7-8835-4013-BE65-7D371DBEE04D}</Project>
       <Name>DriverManager.Models.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -48,6 +48,12 @@
     <Compile Include="Messages\IDriverCreatedMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DriverManager.Enums\DriverManager.Enums.csproj">
+      <Project>{A03EFD92-8F64-434B-9163-CC0578345A07}</Project>
+      <Name>DriverManager.Enums</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

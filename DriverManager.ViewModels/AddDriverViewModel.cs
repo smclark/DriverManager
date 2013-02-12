@@ -1,5 +1,6 @@
 ﻿using System;
 using Caliburn.Micro;
+using DriverManager.Enums;
 using DriverManager.Models.Interfaces;
 using DriverManager.Models.Messages;
 using DriverManager.ViewModels.Interfaces;
@@ -36,18 +37,16 @@ namespace DriverManager.ViewModels
             var driver = _createDriver();
             driver.FirstName = FirstName;
             driver.LastName = LastName;
-            //driver.AddressInfo.City = "LOL";
-            //driver.VehicleInfo.RegistrationNumber = "SDFSD";
 
-            int result = _model.CreateDriver(driver);
+            var result = _model.SaveDriver(driver);
 
-            if (result != -1)//No error occurred
+            if (result == OpResult.Success)//No error occurred
             {
                 _eventAggregator.Publish(new DriverCreatedMessage(driver.FullName));
             }
             else
             {
-                _eventAggregator.Publish(new ErrorMessage(result));
+                _eventAggregator.Publish(new ErrorMessage((int)result));
             }
         }
     }

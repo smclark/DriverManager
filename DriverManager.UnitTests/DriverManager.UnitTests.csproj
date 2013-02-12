@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriverViewModelTestFixture.cs" />
+    <Compile Include="DriverModelTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +62,10 @@
     <ProjectReference Include="..\DriverManager.DataProviders.Interfaces\DriverManager.DataProviders.Interfaces.csproj">
       <Project>{B8453331-E885-44AD-B813-AB7244F22B6F}</Project>
       <Name>DriverManager.DataProviders.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DriverManager.Enums\DriverManager.Enums.csproj">
+      <Project>{A03EFD92-8F64-434B-9163-CC0578345A07}</Project>
+      <Name>DriverManager.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\DriverManager.Models.Interfaces\DriverManager.Models.Interfaces.csproj">
       <Project>{7B183CC7-8835-4013-BE65-7D371DBEE04D}</Project>

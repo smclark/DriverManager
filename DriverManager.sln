@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F9F3FB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverManager.Enums", "DriverManager.Enums\DriverManager.Enums.csproj", "{A03EFD92-8F64-434B-9163-CC0578345A07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,16 @@ Global
 		{B8453331-E885-44AD-B813-AB7244F22B6F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B8453331-E885-44AD-B813-AB7244F22B6F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B8453331-E885-44AD-B813-AB7244F22B6F}.Release|x86.ActiveCfg = Release|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A03EFD92-8F64-434B-9163-CC0578345A07}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

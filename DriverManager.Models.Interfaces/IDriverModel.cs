@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DriverManager.Enums;
 
 namespace DriverManager.Models.Interfaces
 {
@@ -9,10 +10,9 @@ namespace DriverManager.Models.Interfaces
     {
         IList<IDriver> GetAllDrivers();
         IDriver GetDriverDetails(int id);
-        //Returns a list as there may be multiple drivers with the same name
         IDriver GetDriverByName(string name);
-        int CreateDriver(IDriver newDriver);
-        int DeleteDriver(int driverID);
-        int UpdateDriver(IDriver newDriverDetails, int driverID);
+        OpResult SaveDriver(IDriver newDriver);
+        OpResult DeleteDriver(IDriver driverID);
+        OpResult UpdateDriver(IDriver newDriverDetails);
     }
 }

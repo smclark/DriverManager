@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DriverManager.DataProviders.Interfaces;
+using DriverManager.Enums;
 using DriverManager.Models;
 using DriverManager.Models.Interfaces;
 
@@ -67,19 +68,22 @@ namespace DriverManager.DataProviders
         /// <param name="driver">The driver</param>
         /// <exception cref="ArgumentNullException">NULL Driver passed into method</exception>
         /// <returns></returns>
-        public int Delete(IDriver driver)
+        public OpResult Delete(IDriver driver)
         {
+            OpResult result = OpResult.Success;
+            
             if (driver == null)
-                throw new ArgumentNullException("driver");
+                result = OpResult.NullParameter;
 
-            int returnValue = 0;
+            if (result == OpResult.Success)
+            {
+                if (_drivers.Contains(driver))
+                    _drivers.Remove(driver);
+                else
+                    result = OpResult.ObjectNotExists;
+            }
 
-            if (_drivers.Contains(driver))
-                _drivers.Remove(driver);
-            else
-                returnValue = -1;
-
-            return returnValue;
+            return result;
         }
 
         /// <summary>
@@ -87,30 +91,34 @@ namespace DriverManager.DataProviders
         /// </summary>
         /// <param name="driver">The updated Driver.</param>
         /// <returns></returns>
-        public int Update(IDriver driver)
+        public OpResult Update(IDriver driver)
         {
-            if (driver == null)
-                throw new ArgumentNullException("driver");
 
-            int returnValue = 0;
+            OpResult result = OpResult.Success;
+
+            if (driver == null)
+                result = OpResult.NullParameter;
 
             IDriver existingDriver = GetById(driver.ID);
 
-            if(existingDriver != null)
+            if (result == OpResult.Success)
             {
-                int driverIndex = _drivers.IndexOf(existingDriver);
+                if (existingDriver != null)
+                {
+                    int driverIndex = _drivers.IndexOf(existingDriver);
 
-                if (driverIndex >= 0)
-                    _drivers[driverIndex] = driver;
+                    if (driverIndex >= 0)
+                        _drivers[driverIndex] = driver;
+                    else
+                        result = OpResult.ObjectNotExists;
+                }
                 else
-                    returnValue = -2;
-            }
-            else
-            {
-                return -1;
+                {
+                    result = OpResult.ObjectNotExists;
+                }
             }
 
-            return returnValue;
+            return result;
         }
 
         /// <summary>
@@ -118,19 +126,22 @@ namespace DriverManager.DataProviders
         /// </summary>
         /// <param name="driver">The new Driver.</param>
         /// <returns></returns>
-        public int Save(IDriver driver)
+        public OpResult Save(IDriver driver)
         {
+            OpResult result = OpResult.Success;
+
             if (driver == null)
-                throw new ArgumentNullException("driver");
+                result = OpResult.NullParameter;
 
-            int returnValue = 0;
+            if (result == OpResult.Success)
+            {
+                if (!_drivers.Contains(driver))
+                    _drivers.Add(driver);
+                else
+                    result = OpResult.ObjectExists;
+            }
 
-            if (!_drivers.Contains(driver))
-                _drivers.Add(driver);
-            else
-                returnValue = -3;
-
-            return returnValue;
+            return result;
         }
     }
 }

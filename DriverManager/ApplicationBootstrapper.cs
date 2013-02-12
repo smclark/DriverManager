@@ -60,6 +60,10 @@ namespace DriverManager
             _unity.BuildUp(instance.GetType(), instance);
         }
 
+        /// <summary>
+        /// Builds the Unity Container and all the type registerations.
+        /// </summary>
+        /// <returns>Configured Unity Container</returns>
         private static IUnityContainer BuildContainer()
         {
             IUnityContainer result = new UnityContainer();
@@ -67,10 +71,11 @@ namespace DriverManager
             result.RegisterInstance<IWindowManager>(new WindowManager());
             result.RegisterInstance<IEventAggregator>(new EventAggregator());
 
-            result.RegisterType<IDriver, Driver>();
+            result.RegisterType<IDriver, Driver>(new InjectionConstructor(typeof(IAddress), typeof(IVehicle)));
             result.RegisterType<IAddress, Address>();
             result.RegisterType<IVehicle, Vehicle>();
 
+            // IDriver Instantiation Factory
             result.RegisterType<Func<IDriver>>(
                 new InjectionFactory((i => new Func<IDriver>(() => result.Resolve<IDriver>()))));
 

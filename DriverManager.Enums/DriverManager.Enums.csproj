@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58C6ECF5-70F5-4543-9EEB-37AAA163D563}</ProjectGuid>
+    <ProjectGuid>{A03EFD92-8F64-434B-9163-CC0578345A07}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DriverManager.DataProviders</RootNamespace>
-    <AssemblyName>DriverManager.DataProviders</AssemblyName>
+    <RootNamespace>DriverManager.Enums</RootNamespace>
+    <AssemblyName>DriverManager.Enums</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,28 +33,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DriverDataProvider.cs" />
+    <Compile Include="OpResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DriverManager.DataProviders.Interfaces\DriverManager.DataProviders.Interfaces.csproj">
-      <Project>{B8453331-E885-44AD-B813-AB7244F22B6F}</Project>
-      <Name>DriverManager.DataProviders.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DriverManager.Enums\DriverManager.Enums.csproj">
-      <Project>{A03EFD92-8F64-434B-9163-CC0578345A07}</Project>
-      <Name>DriverManager.Enums</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DriverManager.Models.Interfaces\DriverManager.Models.Interfaces.csproj">
-      <Project>{7B183CC7-8835-4013-BE65-7D371DBEE04D}</Project>
-      <Name>DriverManager.Models.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DriverManager.Models\DriverManager.Models.csproj">
-      <Project>{AA670E6B-DE26-4D92-8181-127839E4595D}</Project>
-      <Name>DriverManager.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

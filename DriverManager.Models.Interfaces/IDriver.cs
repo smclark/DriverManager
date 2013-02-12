@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using DriverManager.Enums;
 
 namespace DriverManager.Models.Interfaces
 {
@@ -11,7 +9,8 @@ namespace DriverManager.Models.Interfaces
         string FirstName { get; set; }
         string LastName { get; set; }
         string FullName { get; }
-        IAddress AddressInfo { get; set; }
-        IVehicle VehicleInfo { get; set; }
+        string CardNumber { get; set; }
+        string Country { get; set; }
+        bool Validate();
     }
 }
