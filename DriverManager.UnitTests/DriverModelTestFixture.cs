@@ -253,25 +253,87 @@ namespace DriverManager.UnitTests
         [Test]
         public void UpdateDriverValid()
         {
-            Assert.Fail();
+            //Arrange
+            IDriver driverToSave = new Driver
+            {
+                ID = 1,
+                FirstName = "Dave",
+                LastName = "Grayson",
+                Country = "Scotland",
+                CardNumber = "098765789"
+            };
+
+            var driverDataProvider = Substitute.For<IDriverDataProvider>();
+            driverDataProvider.Update(driverToSave).Returns(OpResult.Success);
+
+            //Act
+            var driverModel = new DriverModel(driverDataProvider);
+            OpResult result = driverModel.UpdateDriver(driverToSave);
+
+            //Assert
+            Assert.AreEqual(OpResult.Success, result);
         }
 
         [Test]
         public void UpdateDriverInvalidNullDriver()
         {
-            Assert.Fail();
+            var driverDataProvider = Substitute.For<IDriverDataProvider>();
+            driverDataProvider.Update(null).Returns(OpResult.NullParameter);
+
+            //Act
+            var driverModel = new DriverModel(driverDataProvider);
+            OpResult result = driverModel.UpdateDriver(null);
+
+            //Assert
+            Assert.AreEqual(OpResult.Success, result);
         }
 
         [Test]
         public void UpdateDriverInvalidDriverNotExists()
         {
-            Assert.Fail();
+            //Arrange
+            IDriver driverToSave = new Driver
+            {
+                ID = 1,
+                FirstName = "Dave",
+                LastName = "Grayson",
+                Country = "Scotland",
+                CardNumber = "098765789"
+            };
+
+            var driverDataProvider = Substitute.For<IDriverDataProvider>();
+            driverDataProvider.Update(driverToSave).Returns(OpResult.ObjectNotExists);
+
+            //Act
+            var driverModel = new DriverModel(driverDataProvider);
+            OpResult result = driverModel.UpdateDriver(driverToSave);
+
+            //Assert
+            Assert.AreEqual(OpResult.Success, result);
         }
 
         [Test]
         public void UpdateDriverInvalidDriverDetails()
         {
-            Assert.Fail();
+            //Arrange
+            IDriver driverToSave = new Driver
+            {
+                ID = 1,
+                FirstName = "Dave",
+                LastName = "Grayson",
+                Country = "Scotland",
+                CardNumber = "098765789"
+            };
+
+            var driverDataProvider = Substitute.For<IDriverDataProvider>();
+            driverDataProvider.Update(driverToSave).Returns(OpResult.InvalidParameters);
+
+            //Act
+            var driverModel = new DriverModel(driverDataProvider);
+            OpResult result = driverModel.UpdateDriver(driverToSave);
+
+            //Assert
+            Assert.AreEqual(OpResult.Success, result);
         }
         #endregion
 
